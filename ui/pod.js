@@ -38,10 +38,11 @@
         root.appendChild(line);
     }
 
-    function row(label, body) {
-        var r = el('div', 'prow-line');
-        add(r, el('span', 'prow-label', label), add(el('div', 'prow-body'), body));
-        return r;
+    // A titled block that folds, the way the app's own sections do.
+    function section(root, id, title, count, what, body) {
+        var sec = sdk.ui.section({ id: id, title: title, count: count, what: what });
+        sec.body.appendChild(body);
+        root.appendChild(sec.root);
     }
 
     function dirChip(dir, on) {
@@ -76,7 +77,7 @@
                 }),
             );
         }
-        root.appendChild(row('Addresses', ips));
+        section(root, 'addresses', 'Addresses', ep.ips.length || undefined, 'the addresses', ips);
 
         var labels = el('div', 'lchips');
         var sorted = K.sortLabels(ep.labels.list).filter(function (l) {
@@ -87,7 +88,7 @@
         });
         if (sorted.length > MAX_LABELS) labels.appendChild(el('span', 'faint small', '+' + (sorted.length - MAX_LABELS)));
         if (!sorted.length) labels.appendChild(el('span', 'faint', 'none'));
-        root.appendChild(row('Identity labels', labels));
+        section(root, 'labels', 'Identity labels', sorted.length || undefined, 'the identity labels', labels);
 
         var pols = M.policiesFor(model, ep);
         var list = el('div', 'plist compact');
@@ -104,7 +105,7 @@
             list.appendChild(b);
         });
         if (pols.length > MAX_POLICIES) list.appendChild(el('span', 'faint small', 'and ' + (pols.length - MAX_POLICIES) + ' more'));
-        root.appendChild(row('Policies', list));
+        section(root, 'policies', 'Policies', pols.length || undefined, 'the policies', list);
 
         var foot = el('div', 'panel-foot');
         foot.appendChild(

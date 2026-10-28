@@ -3385,34 +3385,14 @@ body.page-section {
     height: 12.7px;
 }
 
-.prow-line {
-    display: grid;
-    grid-template-columns: 104px minmax(0, 1fr);
-    gap: 10px;
-    align-items: start;
-    margin-top: 10px;
-}
-
-.prow-label {
-    padding-top: 2px;
-    font-size: 12px;
-    color: var(--c-faint);
-}
-
-.prow-body {
-    min-width: 0;
-}
-
-.prow-body .plist.compact {
-    margin: -4px 0 0 -8px;
-}
-
-.panel-sec {
+/* The panels' titled blocks are the app's ui.section, kept apart from what
+   comes before them as the old rows were. */
+.section-root > .k8sd-section {
     margin-top: 12px;
 }
 
-.panel-sec .mini-title {
-    margin-bottom: 6px;
+.k8sd-section-body > .plist.compact {
+    margin-left: -8px;
 }
 
 .epchips {
@@ -3463,10 +3443,6 @@ button.epchip.warn {
 @media (max-width: 520px) {
     .node-grid {
         grid-template-columns: minmax(0, 1fr);
-    }
-    .prow-line {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 4px;
     }
 }
 

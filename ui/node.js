@@ -133,14 +133,13 @@
 
         var sessions = model.bgp && model.bgp.nodes[n.name];
         if (sessions && sessions.length) {
-            var sec = el('div', 'panel-sec');
-            sec.appendChild(el('h3', 'mini-title', 'BGP sessions'));
+            var sec = sdk.ui.section({ id: 'bgp', title: 'BGP sessions', count: sessions.length, what: 'the BGP sessions' });
             var list = el('div', 'chips');
             sessions.forEach(function (s) {
                 list.appendChild(K.chip(s.address + (s.asn ? ' · AS' + s.asn : '') + ' · ' + s.state.replace('_', ' '), s.tone, 'bgp'));
             });
-            sec.appendChild(list);
-            root.appendChild(sec);
+            sec.body.appendChild(list);
+            root.appendChild(sec.root);
         }
     }
 

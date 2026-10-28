@@ -85,9 +85,9 @@
                 eps.appendChild(b);
             });
             if (p.selected.length > MAX_EPS) eps.appendChild(el('span', 'faint small', '+' + (p.selected.length - MAX_EPS) + ' more'));
-            var sec = el('div', 'panel-sec');
-            add(sec, el('h3', 'mini-title', 'Selected endpoints'), eps);
-            root.appendChild(sec);
+            var sec = sdk.ui.section({ id: 'endpoints', title: 'Selected endpoints', count: p.selected.length, what: 'the selected endpoints' });
+            sec.body.appendChild(eps);
+            root.appendChild(sec.root);
         } else if (!p.host) {
             var none = el('div', 'why warn');
             add(none, K.icon('alert'), el('span', '', 'Nothing matches its selector' + (p.namespace ? ' in ' + p.namespace : '') + ', so it has no effect. Check the labels for a typo.'));
